@@ -48,28 +48,16 @@
     }
 
 #intro {
-  background-image: url("back.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-}
-    #intro {
+  min-height: 100vh;   /* makes it full screen */
+  width: 100%;
   position: relative;
   overflow: hidden;
-}
 
-#intro::before {
-  content: "";
-  position: absolute;
-  inset: 0;
   background-image: url("back.jpg");
-  background-size: cover;
+  background-size: cover;        /* fills entire area */
   background-position: center;
-  background-attachment: fixed;
-  z-index: -1;
+  background-repeat: no-repeat;
 }
-    .text-muted-foreground {
       color: var(--muted-foreground);
     }
 
