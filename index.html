@@ -76,11 +76,31 @@
     @keyframes pulse { 0%,100%{opacity:.8} 50%{opacity:.3} }
 
 
-    .scroll-container { width:100%; min-height:100vh; display:flex; overflow-x:auto; overflow-y:hidden; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; scrollbar-width:none; transition:opacity .7s ease; opacity:0; z-index:10; }
-    .scroll-container.loaded { opacity:1; }
+   .scroll-container {
+    width: 100%;
+    min-height: 100vh;
+    display: block;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    transition: opacity .7s ease;
+    opacity: 0;
+    z-index: 10;
+}
     .scroll-container::-webkit-scrollbar{ display:none; }
 
-    section { width:100vw; height:100vh; flex-shrink:0; scroll-snap-align:start; display:flex; flex-direction:column; padding:24px; position:relative; justify-content:center; }
+   section {
+    width: 100%;
+    min-height: 100vh;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    position: relative;
+    justify-content: center;
+}
     @media(min-width:768px){ section{ padding:48px; } }
 
 
@@ -491,25 +511,36 @@
             revealElements();
         }
 
-        function scrollToSection(index){
-            if (!scrollContainer) return;
-            const sectionWidth = scrollContainer.offsetWidth;
-            scrollContainer.scrollTo({ left: sectionWidth * index, behavior: 'smooth' });
+     function scrollToSection(index){
+    const sections = document.querySelectorAll('section');
+
+    if (!sections[index]) return;
+
+    sections[index].scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+    });
+
+    currentSection = index;
+    updateNavigation();
+}
+function handleScroll(){
+    const sections = document.querySelectorAll('section');
+
+    sections.forEach((section, index) => {
+        const rect = section.getBoundingClientRect();
+
+        if (
+            rect.top <= window.innerHeight / 2 &&
+            rect.bottom >= window.innerHeight / 2
+        ) {
             currentSection = index;
             updateNavigation();
         }
+    });
 
-        function handleScroll(){
-            if (!scrollContainer) return;
-            const sectionWidth = scrollContainer.offsetWidth;
-            const newSection = Math.round(scrollContainer.scrollLeft / sectionWidth);
-            if (newSection !== currentSection){
-                currentSection = newSection;
-                updateNavigation();
-            }
-            revealElements();
-        }
-
+    revealElements();
+}
         function updateNavigation(){
             document.querySelectorAll('.nav-item').forEach((btn,i) => btn.classList.toggle('active', i === currentSection));
         }
@@ -543,11 +574,15 @@
             }, 1200);
         }
 
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' && currentSection < 4) scrollToSection(currentSection + 1);
-            else if (e.key === 'ArrowLeft' && currentSection > 0) scrollToSection(currentSection - 1);
-        });
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown' && currentSection < 4) {
+        scrollToSection(currentSection + 1);
+    }
 
+    if (e.key === 'ArrowUp' && currentSection > 0) {
+        scrollToSection(currentSection - 1);
+    }
+});
         window.addEventListener('load', init);
         if (document.readyState === 'complete') init();
     </script>
