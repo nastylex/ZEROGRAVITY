@@ -1,591 +1,457 @@
 
+<!-----A Laker Leslie Jordan & @MACMAS & AirSPACE-->
 <!DOCTYPE html>
-<!--DESIGNED AFTER WATCHING "ALL OF US ARE DEAD SEASON 1 - NETFLIX"-->
-<!--HEARTBREAK OF ALL TIME-->
-<!--THIS CODE SHOULD HEREBY NOT BE CHANGED WHATS-SO-EVER-->
-<!--THANK YOU-->
-<!--TIME 12:52 AM (MIDNIGHT)-->
-<html lang="en">
+<html lang="en" class="dark">
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" type="image/png" href="logo.png"/>
-    <title>ZEROGRAVITY</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" type="image/png" href="portfolio.png"/>
+  <title>ZEROGRAVITY</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+        .fancy {
+            font-family: "Kristin ITC", cursive;
+        }
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    .animate-fade-in-up {
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
 
     :root {
-        --background: oklch(0.12 0 0);
-        --foreground: oklch(0.98 0 0);
-        --radius: 0.75rem;
+      --background: oklch(1 0 0);
+      --foreground: oklch(0.145 0 0);
+      --muted-foreground: oklch(0.556 0 0);
+      --border: oklch(0.922 0 0);
     }
 
-    html, body {
-        width: 100%;
-        min-height: 100%;
-        overflow-x: hidden;
-        overflow-y: auto;
-        font-family: 'Geist', sans-serif;
-        background: var(--background);
-        color: var(--foreground);
-        cursor: none;
+    .dark {
+      --background: oklch(0.145 0 0);
+      --foreground: oklch(0.985 0 0);
+      --muted-foreground: oklch(0.708 0 0);
+      --border: oklch(0.269 0 0);
     }
 
+    body {
+      background-color: var(--background);
+      color: var(--foreground);
+      font-family: system-ui, -apple-system, sans-serif;
+    }
 
-    .live-bg { position: fixed; inset: 0; z-index: -4; background: radial-gradient(circle at 20% 20%, rgba(8,10,18,0.9), rgba(0,0,0,1)); filter: blur(10px) saturate(1.05); animation: bgShift 12s ease-in-out infinite alternate; pointer-events:none; }
-    @keyframes bgShift { 0%{transform:scale(1)} 100%{transform:scale(1.06) translate3d(-2%,1%,0)} }
+    .text-muted-foreground {
+      color: var(--muted-foreground);
+    }
 
-    body.original-bg { background-image: url("back.png"); background-size: cover; background-position: center; background-repeat: no-repeat; }
+    .border-border {
+      border-color: var(--border);
+    }
 
-    .grain-overlay { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:50; opacity:0.08; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); mix-blend-mode: overlay; }
+    .bg-background {
+      background-color: var(--background);
+    }
 
-    .site-loader { position: fixed; inset: 0; display:flex; align-items:center; justify-content:center; background: rgba(0,0,0,0.92); z-index:9999; transition: opacity .45s ease, visibility .45s; }
-    .site-loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-    .site-loader .spinner { width:72px; height:72px; border-radius:50%; border:4px solid rgba(255,255,255,0.12); border-top-color: rgba(255,255,255,0.98); animation: spin 1s linear infinite; box-shadow: 0 6px 24px rgba(0,0,0,0.6); }
-    @keyframes spin { to { transform: rotate(360deg); } }
+    .text-foreground {
+      color: var(--foreground);
+    }
 
-    .cursor-outer { position:fixed; width:16px; height:16px; border:2px solid white; border-radius:50%; pointer-events:none; z-index:80; mix-blend-mode:difference; transform:translate3d(-9999px,-9999px,0); transition: transform .08s linear; }
-    .cursor-inner { position:fixed; width:8px; height:8px; background:white; border-radius:50%; pointer-events:none; z-index:80; mix-blend-mode:difference; transform:translate3d(-9999px,-9999px,0); transition: transform .08s linear; }
+    html {
+      scroll-behavior: smooth;
+    }
 
+    .nav-dot {
+      transition: all 0.5s ease;
+    }
 
-    nav { position: fixed; top:0; left:0; right:0; z-index:60; display:flex; justify-content:space-between; align-items:center; padding:24px; transition: opacity .7s ease, transform .4s ease; opacity:0; backdrop-filter: blur(6px); }
-    nav.loaded { opacity:1; transform: translateY(0); }
-    .nav-logo { display:flex; gap:8px; align-items:center; background:none; border:none; cursor:pointer; font-family:inherit; }
-    .nav-logo-text { font-size:20px; font-weight:600; letter-spacing:-0.5px; color:var(--foreground); }
-    .nav-menu { display:none; gap:32px; align-items:center; }
-    @media(min-width:768px){ .nav-menu{ display:flex; } }
-    .nav-item { background:none; border:none; color:var(--foreground); font-size:14px; font-weight:500; cursor:pointer; position:relative; opacity:.9; }
-    .nav-item::after { content:''; position:absolute; bottom:-4px; left:0; height:1px; background:var(--foreground); width:0; transition: width .28s ease; }
-    .nav-item:hover::after, .nav-item.active::after{ width:100%; }
+    .nav-dot.active {
+      background-color: var(--foreground);
+    }
 
-    .magnetic-button { padding:10px 24px; font-size:14px; font-weight:500; border:none; border-radius:999px; cursor:pointer; transition: transform .18s ease, background .18s ease; font-family:'Geist', sans-serif; backdrop-filter: blur(8px); }
-    .magnetic-button.primary { background: rgba(255,255,255,0.95); color: var(--background); }
-    .magnetic-button.primary:hover { transform: scale(1.02); background: rgba(255,255,255,1); }
-    .magnetic-button.secondary { background: rgba(255,255,255,0.05); color: var(--foreground); border: 1px solid rgba(255,255,255,0.1); }
-    .magnetic-button.secondary:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); }
-    .magnetic-button.lg { padding:14px 32px; font-size:16px; }
+    .nav-dot:not(.active) {
+      background-color: rgba(128, 128, 128, 0.3);
+    }
 
-
-    @keyframes slideInFromBottom { from { opacity:0; transform: translateY(16px); } to { opacity:1; transform: translateY(0); } }
-    @keyframes slideInFromLeft { from { opacity:0; transform: translateX(-48px); } to { opacity:1; transform: translateX(0); } }
-    @keyframes slideInFromRight { from { opacity:0; transform: translateX(48px); } to { opacity:1; transform: translateX(0); } }
-    @keyframes pulse { 0%,100%{opacity:.8} 50%{opacity:.3} }
-
-
-   .scroll-container {
-    width: 100%;
-    min-height: 100vh;
-    display: block;
-    overflow-x: hidden;
-    overflow-y: auto;
-    scroll-snap-type: y mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    transition: opacity .7s ease;
-    opacity: 0;
-    z-index: 10;
-}
-    .scroll-container::-webkit-scrollbar{ display:none; }
-
-   section {
-    width: 100%;
-    min-height: 100vh;
-    scroll-snap-align: start;
-    display: flex;
-    flex-direction: column;
-    padding: 24px;
-    position: relative;
-    justify-content: center;
-}
-    @media(min-width:768px){ section{ padding:48px; } }
-
-
-    .hero { justify-content:flex-end; padding-bottom:64px; padding-top:48px; }
-    .hero-content { max-width:48rem; }
-    .hero-badge { display:inline-block; margin-bottom:16px; padding:6px 16px; border-radius:999px; border:1px solid rgba(255,255,255,0.15); background:rgba(255,255,255,0.12); font-family:'Geist Mono', monospace; font-size:12px; color:rgba(255,255,255,0.9); animation: slideInFromBottom .6s ease both; }
-    .hero h1 { font-size: clamp(28px, 6vw, 84px); font-weight:300; line-height:1.05; margin-bottom:24px; letter-spacing:-1px; animation: slideInFromBottom .7s ease .05s both; }
-    .hero p { font-size: clamp(14px,2.2vw,18px); line-height:1.6; color:rgba(255,255,255,.9); max-width:36rem; margin-bottom:32px; animation: slideInFromBottom .7s ease .15s both; }
-    .hero-buttons { animation: slideInFromBottom .7s ease .25s both; display:flex; gap:12px; flex-wrap:wrap; }
-    .scroll-hint { position:absolute; bottom:32px; left:50%; transform:translateX(-50%); display:flex; align-items:center; gap:8px; animation: slideInFromBottom .7s ease .45s both; }
-    .scroll-hint-text { font-family:'Geist Mono', monospace; font-size:12px; color:rgba(255,255,255,.8); }
-    .scroll-hint-dot { width:24px; height:24px; border-radius:999px; border:1px solid rgba(255,255,255,.2); background: rgba(255,255,255,.12); display:flex; align-items:center; justify-content:center; }
-    .scroll-hint-dot::after { content:''; width:4px; height:4px; background:rgba(255,255,255,.8); border-radius:50%; animation:pulse 1.5s infinite; }
-
-
-    .section-header { margin-bottom:48px; opacity:0; transform:translateX(-48px); transition:all .7s ease; }
-    .section-header.visible { opacity:1; transform:translateX(0); animation: slideInFromLeft .7s ease both; }
-    .section-header h2 { font-family: 'Geist', sans-serif; font-size:48px; font-weight:300; letter-spacing:-1px; line-height:1.1; margin-bottom:8px; }
-    @media(min-width:768px){ .section-header h2 { font-size:60px; } }
-    .section-header-subtitle { font-family: 'Geist Mono', monospace; font-size:14px; color: rgba(255,255,255,0.6); }
-
-
-    .work-items { display:flex; flex-direction:column; gap:24px; }
-    .work-card { display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.1); padding:24px 0; opacity:0; cursor:pointer; transform: translateX(-8px); transition: transform .4s ease, opacity .4s ease; }
-    .work-card.visible { opacity:1; transform: translateX(0); animation: slideInFromLeft .6s ease both; }
-    .work-card-number { font-family:'Geist Mono', monospace; font-size:14px; color: rgba(255,255,255,0.3); margin-right:32px; min-width:40px; }
-    .work-card-content { flex:1; }
-    .work-card-title { font-family:'Geist', sans-serif; font-size:24px; font-weight:300; margin-bottom:4px; transition: transform .3s ease; }
-    .work-card:hover .work-card-title { transform: translateX(8px); }
-    .work-card-category { font-family:'Geist Mono', monospace; font-size:12px; color: rgba(255,255,255,0.5); }
-
-
-    .services-grid { display:grid; grid-template-columns:1fr; gap:32px; }
-    @media(min-width:768px){ .services-grid{ grid-template-columns:1fr 1fr; gap:64px; } }
-    .service-card { opacity:0; transition: all .7s ease; }
-    .service-card.visible { opacity:1; animation: slideInFromLeft .6s ease both; }
-    .service-marker-number { font-family:'Geist Mono', monospace; font-size:12px; color: rgba(255,255,255,0.6); }
-    .service-title { font-family:'Geist', sans-serif; font-size:24px; font-weight:300; margin-bottom:8px; }
-    .service-description { font-family:'Geist', sans-serif; font-size:14px; line-height:1.6; color: rgba(255,255,255,0.8); max-width:22rem; }
-
-
-    .about-grid{ display:grid; gap:32px; }
-    @media(min-width:768px){ .about-grid{ grid-template-columns:1.2fr 1fr; gap:64px; } }
-    .about-title { opacity:0; transform:translateY(-24px); transition: all .6s ease; }
-    .about-title.visible { opacity:1; transform:translateY(0); animation: slideInFromBottom .6s ease both; }
-    .about-title h2 { font-family:'Geist', sans-serif; font-size:32px; font-weight:300; line-height:1.1; letter-spacing:-0.5px; margin-bottom:12px; }
-    @media(min-width:768px){ .about-title h2 { font-size:48px; } }
-    .about-title h2 .faded { color: rgba(255,255,255,0.25); }
-    .about-description { opacity:0; transform:translateY(12px); transition:all .6s ease .12s; }
-    .about-description.visible { opacity:1; transform:translateY(0); animation: slideInFromBottom .6s ease .12s both; }
-
-    .stat { display:flex; align-items:baseline; gap:16px; border-left:1px solid rgba(255,255,255,0.3); padding-left:32px; transition: all .7s ease; opacity:0; }
-    .stat.visible { opacity:1; }
-    .stat-value { font-family:'Geist', sans-serif; font-size:36px; font-weight:300; }
-    @media(min-width:768px){ .stat-value { font-size:60px; } }
-    .stat-label { font-family:'Geist', sans-serif; font-size:16px; font-weight:300; }
-    .stat-sublabel { font-family:'Geist Mono', monospace; font-size:12px; color: rgba(255,255,255,0.6); }
-
-
-    .contact-grid { display:grid; gap:32px; }
-    @media(min-width:768px){ .contact-grid{ grid-template-columns:1.2fr 1fr; gap:64px; } }
-    .contact-title { opacity:0; transform:translateX(-48px); transition:all .6s ease; }
-    .contact-title.visible { opacity:1; transform:translateX(0); animation: slideInFromLeft .6s ease both; }
-    .contact-title h2 { font-family:'Geist', sans-serif; font-size:36px; font-weight:300; line-height:1.05; letter-spacing:-0.5px; margin-bottom:12px; }
-    @media(min-width:768px){ .contact-title h2 { font-size:60px; } }
-
-    .contact-info { display:flex; flex-direction:column; gap:32px; }
-    .contact-item { opacity:0; transform:translateX(-64px); transition:all .6s ease; }
-    .contact-item.visible { opacity:1; transform:translateX(0); animation: slideInFromLeft .6s ease both; }
-    .contact-label { display:flex; align-items:center; gap:8px; margin-bottom:4px; font-family:'Geist Mono', monospace; font-size:12px; color: rgba(255,255,255,0.6); }
-    .contact-value { font-family:'Geist', sans-serif; font-size:18px; color:var(--foreground); text-decoration:none; }
-    .contact-value a { color: var(--foreground); text-decoration: none; transition: opacity .2s ease; }
-    .contact-value a:hover { opacity:0.8; }
-
-    .contact-socials { display:flex; gap:8px; padding-top:8px; }
-    .contact-social { font-family:'Geist Mono', monospace; font-size:12px; color: rgba(255,255,255,0.6); text-decoration:none; border-bottom:1px solid transparent; transition: all .2s ease; cursor:pointer; background:none; border:none; padding:0; }
-    .contact-social:hover { color: rgba(255,255,255,0.9); border-bottom-color: rgba(255,255,255,0.6); }
-
-
-
-    .form-group { margin-bottom:24px; opacity:0; transform:translateX(64px); transition: all .6s ease; }
-    .form-group.visible { opacity:1; transform:translateX(0); animation: slideInFromRight .6s ease both; }
-    .form-label { display:block; margin-bottom:8px; font-family:'Geist Mono', monospace; font-size:12px; color: rgba(255,255,255,0.6); }
-    .form-input, .form-textarea { width:100%; border:none; border-bottom:1px solid rgba(255,255,255,0.3); background:transparent; padding:8px 0; font-family:'Geist', sans-serif; font-size:14px; color:var(--foreground); }
-    .form-textarea { min-height:80px; resize:vertical; }
-    .success-message { text-align:center; font-family:'Geist Mono', monospace; font-size:14px; color:rgba(255,255,255,0.8); margin-top:16px; }
-
-
-    @media(max-width:420px){ nav{ padding:12px; } .nav-logo-text{ font-size:18px; } .magnetic-button.lg{ padding:10px 18px; font-size:14px; } }
-
-    </style>
+    .nav-dot:not(.active):hover {
+      background-color: rgba(128, 128, 128, 0.6);
+    }
+  </style>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            background: 'var(--background)',
+            foreground: 'var(--foreground)',
+            'muted-foreground': 'var(--muted-foreground)',
+            border: 'var(--border)',
+          }
+        }
+      }
+    }
+  </script>
 </head>
-<body class="original-bg">
-    <div class="live-bg" aria-hidden="true"></div>
-    <div class="grain-overlay" aria-hidden="true"></div>
-
-    <div class="site-loader" id="siteLoader" role="status" aria-live="polite">
-        <div class="spinner" aria-hidden="true"></div>
+<body class="min-h-screen bg-background text-foreground relative">
+  <nav class="fixed left-8 top-1/2 -translate-y-1/2 z-10 hidden lg:block">
+    <div class="flex flex-col gap-4">
+      <button onclick="scrollToSection('intro')" class="nav-dot w-2 h-8 rounded-full" aria-label="Navigate to intro"></button>
+      <button onclick="scrollToSection('work')" class="nav-dot w-2 h-8 rounded-full" aria-label="Navigate to work"></button>
+      <button onclick="scrollToSection('thoughts')" class="nav-dot w-2 h-8 rounded-full" aria-label="Navigate to thoughts"></button>
+      <button onclick="scrollToSection('connect')" class="nav-dot w-2 h-8 rounded-full" aria-label="Navigate to connect"></button>
     </div>
+  </nav>
 
-    <div class="cursor-outer" id="cursorOuter"></div>
-    <div class="cursor-inner" id="cursorInner"></div>
+  <main class="max-w-4xl mx-auto px-6 sm:px-8 lg:px-16">
+    <header id="intro" class="min-h-screen flex items-center opacity-0">
+      <div class="grid lg:grid-cols-5 gap-12 sm:gap-16 w-full">
+        <div class="lg:col-span-3 space-y-6 sm:space-y-8">
+          <div class="space-y-3 sm:space-y-2">
+            <div class="text-sm text-muted-foreground font-mono tracking-wider">An AirSPACEX COMPANY</div>
+            <h1 class="fancy">Laker - Leslie</h1>
+            </h1>
+          </div>
 
-    <nav id="mainNav" aria-label="Primary navigation">
-        <button class="nav-logo" onclick="scrollToSection(0)" aria-label="Go to home">
-            <div class="nav-logo-text">AirSPACEx</div>
-        </button>
+          <div class="space-y-6 max-w-md">
+            <p class="text-lg sm:text-xl text-muted-foreground leading-relaxed">
+              Frontend Developer crafting digital experiences at the intersection of
+              <span class="text-foreground"> design</span>,<span class="text-foreground"> technology</span>,
+              and <span class="text-foreground"> user experience</span>.
+            </p>
 
-        <div class="nav-menu" id="navMenu" role="menubar">
-            <button onclick="scrollToSection(0)" class="nav-item active">Home</button>
-            <button onclick="scrollToSection(1)" class="nav-item">Work</button>
-            <button onclick="scrollToSection(2)" class="nav-item">Services</button>
-            <button onclick="scrollToSection(3)" class="nav-item">About</button>
-            <button onclick="scrollToSection(4)" class="nav-item">Contact</button>
+            <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 text-sm text-muted-foreground">
+              <div class="flex items-center gap-2">
+                <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                Available To Work & Have Fun.
+              </div>
+              <div>Uganda</div>
+            </div>
+          </div>
         </div>
 
-        <button class="magnetic-button secondary" onclick="scrollToSection(4)">Wanna Talk??</button>
-    </nav>
-
-    <div class="scroll-container" id="scrollContainer" aria-live="polite">
-        <section class="hero">
-            <div class="hero-content">
-                <div class="hero-badge">ZEROGRAVITY</div>
-                <h1>ZEROGRAVITY</h1>
-                <p> Transforming digital spaces with Server Sided database systems.</p>
-                <div class="hero-buttons">
-                    <button class="magnetic-button primary lg" onclick="scrollToSection(1)">Explore Our Work</button>
-                    <button class="magnetic-button secondary lg" onclick="scrollToSection(2)">Our Services</button>
-                </div>
+        <div class="lg:col-span-2 flex flex-col justify-end space-y-6 sm:space-y-8 mt-8 lg:mt-0">
+          <div class="space-y-4">
+            <div class="text-sm text-muted-foreground font-mono">CURRENTLY</div>
+            <div class="space-y-2">
+              <div class="text-foreground">Frontend Developer</div>
+              <div class="text-muted-foreground">@ Naalya Secondary School</div>
+              <div class="text-xs text-muted-foreground">2022 — Present</div>
             </div>
-            <div class="scroll-hint" aria-hidden="true">
-                <div class="scroll-hint-text">Start Exploring</div>
-                <div class="scroll-hint-dot"></div>
+          </div>
+
+          <div class="space-y-4">
+            <div class="text-sm text-muted-foreground font-mono">FOCUS</div>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 text-xs border border-border rounded-full hover:border-gray-500 transition-colors duration-300">HTML</span>
+              <span class="px-3 py-1 text-xs border border-border rounded-full hover:border-gray-500 transition-colors duration-300">CSS</span>
+              <span class="px-3 py-1 text-xs border border-border rounded-full hover:border-gray-500 transition-colors duration-300">PHYTHON</span>
+              <span class="px-3 py-1 text-xs border border-border rounded-full hover:border-gray-500 transition-colors duration-300">PHP</span>
+              <span class="px-3 py-1 text-xs border border-border rounded-full hover:border-gray-500 transition-colors duration-300">MYSQL</span>
             </div>
-        </section>
+          </div>
+        </div>
+      </div>
+    </header> 
+    <section id="work" class="min-h-screen py-20 sm:py-32 opacity-0">
+      <div class="space-y-12 sm:space-y-16">
+        <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+          <h2 class="text-3xl sm:text-4xl font-light">Selected Work</h2>
+          <div class="text-sm text-muted-foreground font-mono">2022 — 2025</div>
+        </div>
 
-
-        <section class="work-section">
-            <div class="section-container">
-                <div class="section-header">
-                    <h2>Featured</h2>
-                    <div class="section-header-subtitle">/\ Recent explorations</div>
-                </div>
-                <div class="work-items">
-                    <div class="work-card">
-                        <div class="work-card-number">01</div>
-                        <div class="work-card-content">
-                            <div class="work-card-title">AirSPACEx Intranet </div>
-                            <div class="work-card-category">These services improve businesses through access to verified & private information</div>
-                        </div>
-                        <div class="work-card-year">2024</div>
-                    </div>
-                    <div class="work-card">
-                        <div class="work-card-number">02</div>
-                        <div class="work-card-content">
-                            <div class="work-card-title">Generative Platforms</div>
-                            <div class="work-card-category">MACMAS, MACMAS Academy, MAC-Sat Lucy Protocol, AirSPACEx Intranet and more</div>
-                        </div>
-                        <div class="work-card-year">2024</div>
-                    </div>
-                    <div class="work-card">
-                        <div class="work-card-number">03</div>
-                        <div class="work-card-content">
-                            <div class="work-card-title">Spatial AR Interface</div>
-                            <div class="work-card-category">Fully interactive & Live platforms developed in real time </div>
-                        </div>
-                        <div class="work-card-year">2023</div>
-                    </div>
-                </div>
+        <div class="space-y-8 sm:space-y-12">
+          <div class="group grid lg:grid-cols-12 gap-4 sm:gap-8 py-6 sm:py-8 border-b border-border/50 hover:border-border transition-colors duration-500">
+            <div class="lg:col-span-2">
+              <div class="text-xl sm:text-2xl font-light text-muted-foreground group-hover:text-foreground transition-colors duration-500">2023</div>
             </div>
-        </section>
-
-
-        <section class="services-section">
-            <div class="section-container">
-                <div class="section-header">
-                    <h2>Capabilities</h2>
-                    <div class="section-header-subtitle">/\ What we bring to the table</div>
-                </div>
-                <div class="services-grid">
-                    <div class="service-card">
-                        <div class="service-marker">
-                            <div class="service-marker-line"></div>
-                            <div class="service-marker-number">01</div>
-                        </div>
-                        <h3 class="service-title">Creative Development</h3>
-                        <p class="service-description">Pushing the boundaries of what's possible on the web</p>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-marker">
-                            <div class="service-marker-line"></div>
-                            <div class="service-marker-number">02</div>
-                        </div>
-                        <h3 class="service-title">Visual Design</h3>
-                    <p class="service-description">Crafting memorable experiences through thoughtful aesthetic</p>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-marker">
-                            <div class="service-marker-line"></div>
-                            <div class="service-marker-number">03</div>
-                        </div>
-                        <h3 class="service-title">Motion & Animation</h3>
-                        <p class="service-description">Bringing interfaces to life with purposeful movement</p>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-marker">
-                            <div class="service-marker-line"></div>
-                            <div class="service-marker-number">04</div>
-                        </div>
-                        <h3 class="service-title">Technical Strategy</h3>
-                        <p class="service-description">Building scalable solutions that perform & work flawlessly</p>
-                    </div>
-                </div>
+            <div class="lg:col-span-6 space-y-3">
+              <div>
+                <h3 class="text-lg sm:text-xl font-medium">Frontend Designer</h3>
+                <div class="text-muted-foreground">MACMAS</div>
+              </div>
+              <p class="text-muted-foreground leading-relaxed max-w-lg">Leading frontend ART & DESIGN for developer tools and AI-powered firms.</p>
             </div>
-        </section>
-
-
-        <section class="about-section">
-            <div class="section-container">
-                <div class="about-grid">
-                    <div class="about-left">
-                        <div class="about-title">
-                            <h2>Building the<br>future of<br><span class="faded">digital</span></h2>
-                        </div>
-                        <div class="about-description">
-                            <p>We're a collective of designers, developers, and creative technologists obsessed with crafting exceptional digital experiences.</p>
-                            <p>Every project is an opportunity to explore new possibilities and push creative boundaries.</p>
-                        </div>
-                    </div>
-                    <div class="about-right">
-                        <div class="stat">
-                            <div class="stat-value">15+</div>
-                            <div class="stat-content">
-                                <div class="stat-label">Projects</div>
-                                <div class="stat-sublabel">Delivered Throughout</div>
-                            </div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">Young</div>
-                            <div class="stat-content">
-                                <div class="stat-label">Years</div>
-                                <div class="stat-sublabel">Of innovation</div>
-                            </div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">15+ Future</div>
-                            <div class="stat-content">
-                                <div class="stat-label">Awards</div>
-                                <div class="stat-sublabel">Industry recognition</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="about-buttons">
-                    <button class="magnetic-button primary lg" onclick="scrollToSection(4)">Contact-Us</button>
-                    <button class="magnetic-button secondary lg" onclick="scrollToSection(1)">Our Work</button>
-                </div>
+            <div class="lg:col-span-4 flex flex-wrap gap-2 lg:justify-end mt-2 lg:mt-0">
+              <span class="px-2 py-1 text-xs text-muted-foreground rounded">HTML</span>
+              <span class="px-2 py-1 text-xs text-muted-foreground rounded">CSS</span>
+              <span class="px-2 py-1 text-xs text-muted-foreground rounded">PHP</span>
             </div>
-        </section>
-
-
-        <section class="contact-section">
-            <div class="section-container">
-                <div class="contact-grid">
-                    <div class="contact-left">
-                        <div class="contact-title">
-                            <h2>Let's<br>talk</h2>
-                            <div class="section-header-subtitle">/\ Get in touch</div>
-                        </div>
-
-                        <div class="contact-info">
-                            <div class="contact-item">
-                                <div class="contact-label"><span>✉️</span><span>Email</span></div>
-                                <p class="contact-value"><a href="mailto:Airspacedevtools.proton.me">Airspacedevtools.proton.me</a></p>
-                                <p class="contact-value"><a href="mailto:lakerleslie3@gmail.com">lakerleslie3@gmail.com</a></p>
-                            </div>
-
-                            <div class="contact-item">
-                                <div class="contact-label"><span>📍</span><span>Location</span></div>
-                                <p class="contact-value">AirSPACEx - Uganda</p>
-                            </div>
-
-                            <div class="contact-item">
-                                <div class="contact-socials">
-                                    <a href="https://x.com/airspacedev?s=11" class="contact-social" target="_blank" rel="noopener">Twitter (X)</a>
-                                    <a href="https://www.Instagram.com/lesli_e_16?igsh=NnJ5b3puam1jZ3Nh&utm_source=qr" class="contact-social" target="_blank" rel="noopener">Instagram</a>
-                                    <a href="https://www.linkedin.com/in/lessleemacmas" class="contact-social" target="_blank" rel="noopener">LinkedIn</a>
-                                    <a href="nothing_here_yet.html" class="contact-social">MACMAS NETWORK</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                            <div class="form-group">
-    <div class="contact-right">
-        <form 
-            id="contactForm"
-            action="https://formspree.io/f/xwvwgnke"
-            method="POST"
-        >
-            <div class="form-group">
-                <label class="form-label">Name</label>
-                <input 
-                    type="text" 
-                    name="name"
-                    id="name" 
-                    class="form-input" 
-                    placeholder="Your name" 
-                    required
-                >
+          </div>
+          <div class="group grid lg:grid-cols-12 gap-4 sm:gap-8 py-6 sm:py-8 border-b border-border/50 hover:border-border transition-colors duration-500">
+            <div class="lg:col-span-2">
+              <div class="text-xl sm:text-2xl font-light text-muted-foreground group-hover:text-foreground transition-colors duration-500">2022</div>
             </div>
-
-            <div class="form-group">
-                <label class="form-label">Email</label>
-                <input 
-                    type="email" 
-                    name="email"
-                    id="email" 
-                    class="form-input" 
-                    placeholder="your@email.com" 
-                    required
-                >
+            <div class="lg:col-span-6 space-y-3">
+              <div>
+                <h3 class="text-lg sm:text-xl font-medium">MACMAS Academy Engineer</h3>
+                <div class="text-muted-foreground">Linear & Under Development</div>
+              </div>
+              <p class="text-muted-foreground leading-relaxed max-w-lg">Building htgh performance interfaces for project management and teams.</p>
             </div>
-
-            <div class="form-group">
-                <label class="form-label">Message</label>
-                <textarea 
-                    name="message"
-                    id="message" 
-                    class="form-textarea" 
-                    placeholder="Tell us about your project..." 
-                    required
-                ></textarea>
+            <div class="lg:col-span-4 flex flex-wrap gap-2 lg:justify-end mt-2 lg:mt-0">
+              <span class="px-2 py-1 text-xs text-muted-foreground rounded">HTML</span>
+              <span class="px-2 py-1 text-xs text-muted-foreground rounded">MySQL</span>
+              <span class="px-2 py-1 text-xs text-muted-foreground rounded">CSS</span>
             </div>
+          </div>
 
-            <div class="form-group">
-                <button 
-                    type="submit" 
-                    class="magnetic-button primary lg" 
-                    style="width:100%;"
-                >
-                    Send Message
-                </button>
 
-                <div 
-                    id="successMessage" 
-                    class="success-message" 
-                    style="display:none;"
-                >
-                    Message sent successfully!
-                </div>
+          <div class="group grid lg:grid-cols-12 gap-4 sm:gap-8 py-6 sm:py-8 border-b border-border/50 hover:border-border transition-colors duration-500">
+            <div class="lg:col-span-2">
+              <div class="text-xl sm:text-2xl font-light text-muted-foreground group-hover:text-foreground transition-colors duration-500">2021</div>
             </div>
-        </form> 
-    </div>
-</div>
-                </div>
+            <div class="lg:col-span-6 space-y-3">
+              <div>
+                <h3 class="text-lg sm:text-xl font-medium">Server Management</h3>
+                <div class="text-muted-foreground">XXampp & WAMP </div>
+              </div>
+              <p class="text-muted-foreground leading-relaxed max-w-lg">Developed Shopping , Easy And Online Platforms.</p>
             </div>
-        </section>
-    </div>
+            <div class="lg:col-span-4 flex flex-wrap gap-2 lg:justify-end mt-2 lg:mt-0">
+              <span class="px-2 py-1 text-xs text-muted-foreground rounded">Skill</span>
+              <span class="px-2 py-1 text-xs text-muted-foreground rounded">DataBase</span>
+              <span class="px-2 py-1 text-xs text-muted-foreground rounded">PHP</span>
+            </div>
+          </div>
 
-    <script>
-        
-        const scrollContainer = document.querySelector('.scroll-container');
-        const nav = document.querySelector('nav');
-        const cursorOuter = document.getElementById('cursorOuter');
-        const cursorInner = document.getElementById('cursorInner');
-        const loader = document.getElementById('siteLoader');
-        let currentSection = 0;
-        let loaderHidden = false;
+          <div class="group grid lg:grid-cols-12 gap-4 sm:gap-8 py-6 sm:py-8 border-b border-border/50 hover:border-border transition-colors duration-500">
+            <div class="lg:col-span-2">
+              <div class="text-xl sm:text-2xl font-light text-muted-foreground group-hover:text-foreground transition-colors duration-500">2019</div>
+            </div>
+            <div class="lg:col-span-6 space-y-3">
+              <div>
+                <h3 class="text-lg sm:text-xl font-medium">Web Designer</h3>
+                <div class="text-muted-foreground">Github</div>
+              </div>
+              <p class="text-muted-foreground leading-relaxed max-w-lg">All Designed Platforms And All Done Via Github's CodeSpaces.</p>
+            </div>
+            <div class="lg:col-span-4 flex flex-wrap gap-2 lg:justify-end mt-2 lg:mt-0">
+              <span class="px-2 py-1 text-xs text-muted-foreground rounded">PHYTHON</span>
+              <span class="px-2 py-1 text-xs text-muted-foreground rounded">Skill</span>
+              <span class="px-2 py-1 text-xs text-muted-foreground rounded">MySQL</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  <!----Laker Add thoughts next time-->
+    <section id="thoughts" class="min-h-screen py-20 sm:py-32 opacity-0">
+      <div class="space-y-12 sm:space-y-16">
+        <h2 class="text-3xl sm:text-4xl font-light">Recent Thoughts</h2>
 
-        // cursor smoothing (lerp)
-        let mouseX = -100, mouseY = -100;
-        let outerX = -100, outerY = -100;
-        let innerX = -100, innerY = -100;
-        const speed = 0.18;
-        function lerp(a,b,t){ return a + (b-a)*t; }
-        function updateCursorPosition(){
-            outerX = lerp(outerX, mouseX, speed);
-            outerY = lerp(outerY, mouseY, speed);
-            innerX = lerp(innerX, mouseX, 0.5);
-            innerY = lerp(innerY, mouseY, 0.5);
-            if (cursorOuter) cursorOuter.style.transform = `translate3d(${outerX - 8}px, ${outerY - 8}px, 0)`;
-            if (cursorInner) cursorInner.style.transform = `translate3d(${innerX - 4}px, ${innerY - 4}px, 0)`;
-            requestAnimationFrame(updateCursorPosition);
-        }
-        requestAnimationFrame(updateCursorPosition);
+        <div class="grid gap-6 sm:gap-8 lg:grid-cols-2">
+          <article class="group p-6 sm:p-8 border border-border rounded-lg hover:border-gray-500 transition-all duration-500 hover:shadow-lg cursor-pointer">
+            <div class="space-y-4">
+              <div class="flex items-center justify-between text-xs text-muted-foreground font-mono">
+                <span>Dec 2024</span>
+                <span>5 min</span>
+              </div>
+              <h3 class="text-lg sm:text-xl font-medium group-hover:text-muted-foreground transition-colors duration-300">The Future of Web Development</h3>
+              <p class="text-muted-foreground leading-relaxed">Exploring how MACMAS and AirSPACE Software are reshaping the way we build the web.</p>
+              <div class="flex items-center gap-2 text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-300">
+                <span>Read more</span>
+                <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </div>
+            </div>
+          </article>
 
-        function init() {
-            document.addEventListener('mousemove', (e) => {
-                mouseX = e.clientX; mouseY = e.clientY;
-            });
+          <article class="group p-6 sm:p-8 border border-border rounded-lg hover:border-gray-500 transition-all duration-500 hover:shadow-lg cursor-pointer">
+            <div class="space-y-4">
+              <div class="flex items-center justify-between text-xs text-muted-foreground font-mono">
+                <span>Nov 2024</span>
+                <span>8 min</span>
+              </div>
+              <h3 class="text-lg sm:text-xl font-medium group-hover:text-muted-foreground transition-colors duration-300">Design Systems at Schools</h3>
+              <p class="text-muted-foreground leading-relaxed">Lessons learned from building and maintaining design systems across multiple products all under MACMAS Academy</p>
+              <div class="flex items-center gap-2 text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-300">
+                <span>Read more</span>
+                <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </div>
+            </div>
+          </article>
 
-            if (scrollContainer) scrollContainer.addEventListener('scroll', handleScroll, { passive: true });
-            observeElements();
+          <article class="group p-6 sm:p-8 border border-border rounded-lg hover:border-gray-500 transition-all duration-500 hover:shadow-lg cursor-pointer">
+            <div class="space-y-4">
+              <div class="flex items-center justify-between text-xs text-muted-foreground font-mono">
+                <span>Oct 2024</span>
+                <span>6 min</span>
+              </div>
+              <h3 class="text-lg sm:text-xl font-medium group-hover:text-muted-foreground transition-colors duration-300">Performance-First Development</h3>
+              <p class="text-muted-foreground leading-relaxed">Why performance should be a first-class citizen in your development workflow.</p>
+              <div class="flex items-center gap-2 text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-300">
+                <span>Read more</span>
+                <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </div>
+            </div>
+          </article>
 
-            // keeping loader brief or something like that
-            const min = 800; // 800ms or something
-            setTimeout(hideLoaderIfNotHidden, min);
-            // final guard something
-            window.setTimeout(hideLoaderIfNotHidden, 2500);
-        }
+          <article class="group p-6 sm:p-8 border border-border rounded-lg hover:border-gray-500 transition-all duration-500 hover:shadow-lg cursor-pointer">
+            <div class="space-y-4">
+              <div class="flex items-center justify-between text-xs text-muted-foreground font-mono">
+                <span>Sep 2024</span>
+                <span>4 min</span>
+              </div>
+              <h3 class="text-lg sm:text-xl font-medium group-hover:text-muted-foreground transition-colors duration-300">The Art of Code Review</h3>
+              <p class="text-muted-foreground leading-relaxed">I build better software through thoughtful and constructive help through my Fellows & Through Constructive Lines Of Writing.</p>
+              <div class="flex items-center gap-2 text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-300">
+                <span>Read more</span>
+                <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+ 
+    <section id="connect" class="py-20 sm:py-32 opacity-0">
+      <div class="grid lg:grid-cols-2 gap-12 sm:gap-16">
+        <div class="space-y-6 sm:space-y-8">
+          <h2 class="text-3xl sm:text-4xl font-light">Let's Connect</h2>
 
-        function hideLoaderIfNotHidden(){
-            if (loaderHidden) return;
-            loaderHidden = true;
-            if (loader) loader.classList.add('hidden');
-            if (nav) nav.classList.add('loaded');
-            if (scrollContainer) scrollContainer.classList.add('loaded');
-            revealElements();
-        }
+          <div class="space-y-6">
+            <p class="text-lg sm:text-xl text-muted-foreground leading-relaxed">
+              Always interested in new opportunities, collaborations, and conversations about technology, design and improve systems like MACMAS, MACMAS Academy and AirSPACE.
+            </p>
 
-     function scrollToSection(index){
-    const sections = document.querySelectorAll('section');
+            <div class="space-y-4">
+              <a href="mailto:test@example.com" class="group flex items-center gap-3 text-foreground hover:text-muted-foreground transition-colors duration-300">
+                <span class="text-base sm:text-lg">lakerleslie3@gmail.com</span>
+                <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
 
-    if (!sections[index]) return;
+        <div class="space-y-6 sm:space-y-8">
+          <div class="text-sm text-muted-foreground font-mono">ELSEWHERE</div>
 
-    sections[index].scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-    });
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <a href="#" class="group p-4 border border-border rounded-lg hover:border-gray-500 transition-all duration-300 hover:shadow-sm">
+              <div class="space-y-2">
+                <div class="text-foreground group-hover:text-muted-foreground transition-colors duration-300">GitHub</div>
+                <div class="text-sm text-muted-foreground">@LexMACMAS</div>
+              </div>
+            </a>
 
-    currentSection = index;
-    updateNavigation();
-}
-function handleScroll(){
-    const sections = document.querySelectorAll('section');
+            <a href="#" class="group p-4 border border-border rounded-lg hover:border-gray-500 transition-all duration-300 hover:shadow-sm">
+              <div class="space-y-2">
+                <div class="text-foreground group-hover:text-muted-foreground transition-colors duration-300">Phone</div>
+                <div class="text-sm text-muted-foreground">+256-77-537-7603</div>
+              </div>
+            </a>
 
-    sections.forEach((section, index) => {
-        const rect = section.getBoundingClientRect();
+            <a href="#" class="group p-4 border border-border rounded-lg hover:border-gray-500 transition-all duration-300 hover:shadow-sm">
+              <div class="space-y-2">
+                <div class="text-foreground group-hover:text-muted-foreground transition-colors duration-300">Twitter / X</div>
+                <div class="text-sm text-muted-foreground">@lakerleslie3</div>
+              </div>
+            </a>
 
-        if (
-            rect.top <= window.innerHeight / 2 &&
-            rect.bottom >= window.innerHeight / 2
-        ) {
-            currentSection = index;
-            updateNavigation();
-        }
-    });
+            <a href="#" class="group p-4 border border-border rounded-lg hover:border-gray-500 transition-all duration-300 hover:shadow-sm">
+              <div class="space-y-2">
+                <div class="text-foreground group-hover:text-muted-foreground transition-colors duration-300">LinkedIn</div>
+                <div class="text-sm text-muted-foreground">Laker Leslie Jordan</div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="py-12 sm:py-16 border-t border-border">
+      <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 sm:gap-8">
+        <div class="space-y-2">
+          <div class="text-sm text-muted-foreground">© 2025 Laker Leslie Jordan. All rights reserved.</div>
+          <div class="text-xs text-muted-foreground">Built by Laker Leslie Jordan</div>
+        </div>
 
-    revealElements();
-}
-        function updateNavigation(){
-            document.querySelectorAll('.nav-item').forEach((btn,i) => btn.classList.toggle('active', i === currentSection));
-        }
+        <div class="flex items-center gap-4">
+          <button onclick="toggleTheme()" class="group p-3 rounded-lg border border-border hover:border-gray-500 transition-all duration-300" aria-label="Toggle theme">
+            <svg id="sun-icon" class="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors duration-300 hidden" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd" />
+            </svg>
+            <svg id="moon-icon" class="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors duration-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+            </svg>
+          </button>
 
-        function observeElements(){
-            const elements = document.querySelectorAll('.section-header, .work-card, .service-card, .about-title, .about-description, .stat, .about-buttons, .contact-title, .contact-item, .form-group');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
-            }, { threshold: 0.08 });
-            elements.forEach(el => observer.observe(el));
-        }
+          <button class="group p-3 rounded-lg border border-border hover:border-gray-500 transition-all duration-300">
+            <svg class="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </footer>
+  </main>
 
-        function revealElements(){
-            document.querySelectorAll('.section-header, .work-card, .service-card, .about-title, .about-description, .stat, .about-buttons, .contact-title, .contact-item, .form-group').forEach((el) => {
-                const rect = el.getBoundingClientRect();
-                if (rect.top < window.innerHeight && rect.bottom > 0) el.classList.add('visible');
-            });
-        }
+  <div class="fixed bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none"></div>
 
-        function handleSubmit(e){
-            e.preventDefault();
-            const form = e.target;
-            const successMessage = document.getElementById('successMessage');
-            const button = form.querySelector('button[type="submit"]');
-            if (button){ button.disabled = true; button.textContent = 'Sending... to MACMAS ADMIN'; }
-            setTimeout(() => {
-                if (successMessage) successMessage.style.display = 'block';
-                form.reset();
-                if (button){ button.disabled = false; button.textContent = 'Send Message'; }
-                setTimeout(() => { if (successMessage) successMessage.style.display = 'none'; }, 4000);
-            }, 1200);
-        }
-
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowDown' && currentSection < 4) {
-        scrollToSection(currentSection + 1);
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.classList.contains('dark');
+      html.classList.toggle('dark');
+      
+      const sunIcon = document.getElementById('sun-icon');
+      const moonIcon = document.getElementById('moon-icon');
+      
+      if (isDark) {
+        sunIcon.classList.remove('hidden');
+        moonIcon.classList.add('hidden');
+      } else {
+        sunIcon.classList.add('hidden');
+        moonIcon.classList.remove('hidden');
+      }
     }
 
-    if (e.key === 'ArrowUp' && currentSection > 0) {
-        scrollToSection(currentSection - 1);
+
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
     }
-});
-        window.addEventListener('load', init);
-        if (document.readyState === 'complete') init();
-    </script>
+    const sections = document.querySelectorAll('header, section');
+    const navDots = document.querySelectorAll('.nav-dot');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fade-in-up');
+
+          const sectionId = entry.target.id;
+          navDots.forEach((dot, index) => {
+            const sections = ['intro', 'work', 'thoughts', 'connect'];
+            if (sections[index] === sectionId) {
+              dot.classList.add('active');
+            } else {
+              dot.classList.remove('active');
+            }
+          });
+        }
+      });
+    }, { threshold: 0.3, rootMargin: '0px 0px -20% 0px' });
+
+    sections.forEach(section => observer.observe(section));
+    navDots[0].classList.add('active');
+  </script>
+<script>
+    <fuc.==="class div=flex items-center">
+</script>
 </body>
-<!---AirSPACEx-->
 </html>
+<!------N@alya-44-Exce!!ence2025-->
