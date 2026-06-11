@@ -48,15 +48,17 @@
     }
 
 #intro {
-  min-height: 100vh;   /* makes it full screen */
-  width: 100%;
   position: relative;
+  min-height: 100vh;
   overflow: hidden;
+}
 
-  background-image: url("back.jpg");
-  background-size: cover;        /* fills entire area */
-  background-position: center;
-  background-repeat: no-repeat;
+#intro::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("back.jpg") center/cover no-repeat;
+  z-index: -1;
 }
       color: var(--muted-foreground);
     }
