@@ -51,25 +51,24 @@
   position: relative;
   min-height: 100vh;
   overflow: hidden;
+  z-index: 1;
 }
 
 #intro::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: url("back2.jpg") center/cover no-repeat;
+  background-image: url("back2.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   z-index: -1;
 }
-      color: var(--muted-foreground);
-    }
 
-    .border-border {
-      border-color: var(--border);
-    }
-
-    .bg-background {
-      background-color: var(--background);
-    }
+#intro > * {
+  position: relative;
+  z-index: 2;
+}
 
     .text-foreground {
       color: var(--foreground);
@@ -130,7 +129,6 @@
     Z<span class="text-red-50">E</span>ROGRAVITY
 </h2>
             <h1 class="fancy">An AirSPACEx StartUp.</h1>
-            </h1>
           </div>
 
           <div class="space-y-6 max-w-md">
@@ -148,7 +146,7 @@
             <div class="text-sm text-muted-foreground font-mono">FOCUS
             <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 text-sm text-muted-foreground">
               <div class="flex items-center gap-2">
-                
+              </div>
           </div>
             </div>
           <div class="space-y-4">
@@ -454,9 +452,6 @@
     sections.forEach(section => observer.observe(section));
     navDots[0].classList.add('active');
   </script>
-<script>
-    <fuc.==="class div=flex items-center">
-</script>
 </body>
 </html>
 <!------N@alya-44-Exce!!ence2025-->
