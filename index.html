@@ -1,45 +1,20 @@
-
-<!-----A Laker Leslie Jordan & @MACMAS & AirSPACE-->
 <!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" type="image/jpg" href="fav.jpg"/>
   <title>ZEROGRAVITY</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
-        .fancy {
-            font-family: "Agency FB";
-            font-size: 120px;
-        }
-        .steven{
-          font-family:"Old English Text MT";
-          color: red;
-          font-size: 20px;
-        }
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .animate-fade-in-up {
-      animation: fadeInUp 0.8s ease-out forwards;
-    }
-
     :root {
       --background: oklch(1 0 0);
       --foreground: oklch(0.145 0 0);
       --muted-foreground: oklch(0.556 0 0);
       --border: oklch(0.922 0 0);
     }
-
     .dark {
       --background: oklch(0.145 0 0);
       --foreground: oklch(0.985 0 0);
@@ -47,52 +22,241 @@
       --border: oklch(0.269 0 0);
     }
 
-#intro {
-  position: relative;
-  min-height: 100vh;
-  overflow: hidden;
-  z-index: 1;
-}
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; font-family: 'Space Grotesk', sans-serif; }
+    body { min-height: 100vh; background: var(--background); color: var(--foreground); transition: background 0.3s, color 0.3s; }
 
-#intro::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: url("back2.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  z-index: -1;
-}
-
-#intro > * {
-  position: relative;
-  z-index: 2;
-}
-
-    .text-foreground {
-      color: var(--foreground);
+    
+    #intro {
+      position: relative;
+      min-height: 100vh;
+      overflow: hidden;
+      z-index: 1;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: #07070a;
+      z-index: 0;
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 64px 64px;
+    }
+    .hero-glow {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 55% 40%, rgba(99,60,255,0.2) 0%, transparent 70%),
+        radial-gradient(ellipse 45% 40% at 15% 75%, rgba(0,200,150,0.10) 0%, transparent 60%),
+        radial-gradient(ellipse 35% 45% at 85% 10%, rgba(180,40,255,0.12) 0%, transparent 60%);
+      animation: glowPulse 8s ease-in-out infinite alternate;
+    }
+    @keyframes glowPulse {
+      from { opacity: 0.8; }
+      to   { opacity: 1; }
+    }
+    .hero-vignette {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 110% 110% at 50% 50%, transparent 35%, rgba(7,7,10,0.9) 100%);
+    }
+    .stars {
+      position: absolute; inset: 0; overflow: hidden;
+    }
+    .star {
+      position: absolute;
+      border-radius: 50%;
+      background: #fff;
+      animation: twinkle var(--d,3s) ease-in-out infinite var(--delay,0s);
+    }
+    @keyframes twinkle {
+      0%,100% { opacity: 0.15; transform: scale(1); }
+      50%      { opacity: 1;    transform: scale(1.5); }
+    }
+    #intro > .hero-content {
+      position: relative;
+      z-index: 2;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
-
+    
     .nav-dot {
       transition: all 0.5s ease;
     }
-
     .nav-dot.active {
       background-color: var(--foreground);
     }
-
     .nav-dot:not(.active) {
-      background-color: rgba(128, 128, 128, 0.3);
+      background-color: rgba(128,128,128,0.3);
+    }
+    .nav-dot:not(.active):hover {
+      background-color: rgba(128,128,128,0.6);
     }
 
-    .nav-dot:not(.active):hover {
-      background-color: rgba(128, 128, 128, 0.6);
+    
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(36px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
+    @keyframes fadeInLeft {
+      from { opacity: 0; transform: translateX(-24px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes fadeInRight {
+      from { opacity: 0; transform: translateX(24px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.94); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    .anim-fadeup   { opacity: 0; }
+    .anim-fadeleft { opacity: 0; }
+    .anim-faderight{ opacity: 0; }
+    .anim-scalein  { opacity: 0; }
+
+    .anim-fadeup.visible   { animation: fadeInUp   0.7s ease-out forwards; }
+    .anim-fadeleft.visible { animation: fadeInLeft 0.7s ease-out forwards; }
+    .anim-faderight.visible{ animation: fadeInRight 0.7s ease-out forwards; }
+    .anim-scalein.visible  { animation: scaleIn   0.6s ease-out forwards; }
+
+    .delay-100 { animation-delay: 0.1s !important; }
+    .delay-200 { animation-delay: 0.2s !important; }
+    .delay-300 { animation-delay: 0.3s !important; }
+    .delay-400 { animation-delay: 0.4s !important; }
+    .delay-500 { animation-delay: 0.5s !important; }
+    .delay-600 { animation-delay: 0.6s !important; }
+
+    
+    .brand-name {
+      font-size: clamp(52px, 9vw, 96px);
+      font-weight: 300;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      color: #fff;
+    }
+    .brand-accent { color: #7c5cfc; }
+
+    
+    .section-label {
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      color: var(--muted-foreground);
+      text-transform: uppercase;
+      font-family: 'Space Grotesk', monospace;
+    }
+
+    
+    .work-row {
+      display: grid;
+      grid-template-columns: 80px 1fr auto;
+      gap: 24px;
+      align-items: start;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+      transition: border-color 0.4s;
+    }
+    .work-row:hover { border-color: rgba(124,92,252,0.35); }
+    .work-row:last-child { border-bottom: none; }
+
+    
+    .thought-card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      cursor: pointer;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+      background: transparent;
+    }
+    .thought-card:hover {
+      border-color: rgba(124,92,252,0.5);
+      transform: translateY(-3px);
+    }
+
+    
+    .social-card {
+      display: block;
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.3s, transform 0.2s;
+    }
+    .social-card:hover {
+      border-color: rgba(124,92,252,0.5);
+      transform: translateY(-2px);
+    }
+
+    
+    .pill {
+      display: inline-block;
+      font-size: 11px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      color: var(--muted-foreground);
+      transition: border-color 0.3s;
+    }
+    .pill:hover { border-color: rgba(124,92,252,0.5); }
+    .pill-accent {
+      border-color: rgba(124,92,252,0.45);
+      color: rgba(124,92,252,0.95);
+    }
+
+    
+    .tag {
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      color: var(--muted-foreground);
+    }
+
+    
+    .theme-btn {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 10px;
+      cursor: pointer;
+      color: var(--muted-foreground);
+      transition: border-color 0.3s, color 0.3s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .theme-btn:hover { border-color: rgba(124,92,252,0.5); color: var(--foreground); }
+
+    
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--foreground);
+      text-decoration: none;
+      font-size: 16px;
+      transition: color 0.2s;
+    }
+    .contact-link:hover { color: #7c5cfc; }
+    .contact-link svg { transition: transform 0.3s; }
+    .contact-link:hover svg { transform: translateX(4px); }
+
+   
+    .bottom-fade {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      height: 80px;
+      background: linear-gradient(to top, var(--background), transparent);
+      pointer-events: none;
+      z-index: 5;
+      transition: background 0.3s;
+    }
+
+    
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
   </style>
   <script>
     tailwind.config = {
@@ -110,348 +274,370 @@
     }
   </script>
 </head>
-<body class="min-h-screen bg-background text-foreground relative">
+<body class="bg-background text-foreground">
+
+  
   <nav class="fixed left-8 top-1/2 -translate-y-1/2 z-10 hidden lg:block">
     <div class="flex flex-col gap-4">
-      <button onclick="scrollToSection('intro')" class="nav-dot w-2 h-8 rounded-full" aria-label="Navigate to intro"></button>
-      <button onclick="scrollToSection('work')" class="nav-dot w-2 h-8 rounded-full" aria-label="Navigate to work"></button>
-      <button onclick="scrollToSection('thoughts')" class="nav-dot w-2 h-8 rounded-full" aria-label="Navigate to thoughts"></button>
-      <button onclick="scrollToSection('connect')" class="nav-dot w-2 h-8 rounded-full" aria-label="Navigate to connect"></button>
+      <button onclick="scrollToSection('intro')"
+              class="nav-dot w-2 h-8 rounded-full"
+              aria-label="Navigate to intro"
+              title="Intro"></button>
+      <button onclick="scrollToSection('work')"
+              class="nav-dot w-2 h-8 rounded-full"
+              aria-label="Navigate to work"
+              title="Work"></button>
+      <button onclick="scrollToSection('thoughts')"
+              class="nav-dot w-2 h-8 rounded-full"
+              aria-label="Navigate to thoughts"
+              title="Thoughts"></button>
+      <button onclick="scrollToSection('connect')"
+              class="nav-dot w-2 h-8 rounded-full"
+              aria-label="Navigate to connect"
+              title="Connect"></button>
     </div>
   </nav>
 
   <main class="max-w-4xl mx-auto px-6 sm:px-8 lg:px-16">
-    <header id="intro" class="min-h-screen flex items-center opacity-0">
-      <div class="grid lg:grid-cols-5 gap-12 sm:gap-16 w-full">
-        <div class="lg:col-span-3 space-y-6 sm:space-y-8">
-          <div class="space-y-3 sm:space-y-2">
-<h2 class="flex items-center text-5xl font-light leading-none text-white">
-    Z<span class="text-red-50">E</span>ROGRAVITY
-</h2>
-            <h1 class="fancy">An AirSPACEx StartUp.</h1>
+
+    
+    <header id="intro" class="min-h-screen flex items-center">
+      
+      <div class="hero-bg">
+        <div class="stars" id="stars"></div>
+        <div class="hero-grid"></div>
+        <div class="hero-glow"></div>
+        <div class="hero-vignette"></div>
+      </div>
+
+      
+      <div class="hero-content w-full py-20">
+        <div class="max-w-lg">
+         
+          <div class="anim-fadeup flex items-center gap-2 mb-6">
+            <span style="width:6px;height:6px;border-radius:50%;background:#7c5cfc;display:inline-block;box-shadow:0 0 10px #7c5cfc;"></span>
+            <span class="section-label" style="color:rgba(255,255,255,0.4);">An AirSPACEx Startup</span>
           </div>
 
-          <div class="space-y-6 max-w-md">
-            <p class="text-lg sm:text-xl text-muted-foreground leading-relaxed">
-             Your call to Database Solutions keeping in mind 
-              <span class="text-foreground"> Security</span>,<span class="text-foreground"> Technology</span>,
-              and <span class="text-foreground"> User experiences</span>.
-            </p>
-            
-        <div class="lg:col-span-2 flex flex-col justify-end space-y-6 sm:space-y-8 mt-8 lg:mt-0">
-          <div class="space-y-4">
-            <div class="text-sm text-muted-foreground font-mono">CURRENTLY</div>
-            <div class="space-y-2">
-          <div class="space-y-4">
-            <div class="text-sm text-muted-foreground font-mono">FOCUS
-            <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 text-sm text-muted-foreground">
-              <div class="flex items-center gap-2">
-              </div>
-          </div>
-            </div>
-          <div class="space-y-4">
-            <div class="text-sm text-muted-foreground font-mono"></div>
-            <div class="flex flex-wrap gap-2">
-              <span class="px-3 py-1 text-xs border border-border rounded-full hover:border-gray-500 transition-colors duration-300">Security</span>
-              <span class="px-3 py-1 text-xs border border-border rounded-full hover:border-gray-500 transition-colors duration-300">100Gb+</span>
-              <span class="px-3 py-1 text-xs border border-border rounded-full hover:border-gray-500 transition-colors duration-300">Quick</span>
-              <span class="px-3 py-1 text-xs border border-border rounded-full hover:border-gray-500 transition-colors duration-300">100+ uptime</span>
-              <span class="px-3 py-1 text-xs border border-border rounded-full hover:border-gray-500 transition-colors duration-300">1000ms</span>
-            </div>
+          
+          <h1 class="brand-name anim-fadeup delay-100 mb-2">
+            ZERO<span class="brand-accent">G</span>RAVITY
+          </h1>
+          <p class="anim-fadeup delay-200 section-label mb-8" style="color:rgba(255,255,255,0.35); letter-spacing:0.18em;">
+            Database Solutions · Security · Performance
+          </p>
+
+          
+          <p class="anim-fadeup delay-300 text-lg leading-relaxed mb-8"
+             style="color:rgba(255,255,255,0.55); max-width:400px;">
+            Your go-to for enterprise database solutions built around
+            <span style="color:rgba(255,255,255,0.9);">security</span>,
+            <span style="color:rgba(255,255,255,0.9);">technology</span>, and
+            <span style="color:rgba(255,255,255,0.9);">user experience</span>.
+          </p>
+
+         
+          <div class="anim-fadeup delay-400 flex flex-wrap gap-2">
+            <span class="pill pill-accent">Security-first</span>
+            <span class="pill">100 GB+</span>
+            <span class="pill">99.9% uptime</span>
+            <span class="pill">&lt; 1000ms</span>
+            <span class="pill">Fast deploy</span>
           </div>
         </div>
       </div>
-    </header> 
-    <section id="work" class="min-h-screen py-20 sm:py-32 opacity-0">
-      <div class="space-y-12 sm:space-y-16">
-        <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
-          <h2 class="text-3xl sm:text-4xl font-light">Selected Work</h2>
-          <div class="text-sm text-muted-foreground font-mono">2026 — Present</div>
-        </div>
+    </header>
 
-        <div class="space-y-8 sm:space-y-12">
-          <div class="group grid lg:grid-cols-12 gap-4 sm:gap-8 py-6 sm:py-8 border-b border-border/50 hover:border-border transition-colors duration-500">
-            <div class="lg:col-span-2">
-              <div class="text-xl sm:text-2xl font-light text-muted-foreground group-hover:text-foreground transition-colors duration-500">2023</div>
-            </div>
-            <div class="lg:col-span-6 space-y-3">
-              <div>
-                <h3 class="text-lg sm:text-xl font-medium">Server Sided Storage</h3>
-                <div class="text-muted-foreground">AirSPACEx</div>
-              </div>
-              <p class="text-muted-foreground leading-relaxed max-w-lg">Leading makers for developer tools and AI-powered firms.</p>
-            </div>
-            <div class="lg:col-span-4 flex flex-wrap gap-2 lg:justify-end mt-2 lg:mt-0">
-              <span class="px-2 py-1 text-xs text-muted-foreground rounded">Secure</span>
-              <span class="px-2 py-1 text-xs text-muted-foreground rounded">Fast</span>
-              <span class="px-2 py-1 text-xs text-muted-foreground rounded">Reliable</span>
-            </div>
-          </div>
-          <div class="group grid lg:grid-cols-12 gap-4 sm:gap-8 py-6 sm:py-8 border-b border-border/50 hover:border-border transition-colors duration-500">
-            <div class="lg:col-span-2">
-              <div class="text-xl sm:text-2xl font-light text-muted-foreground group-hover:text-foreground transition-colors duration-500">2022</div>
-            </div>
-            <div class="lg:col-span-6 space-y-3">
-              <div>
-                <h3 class="text-lg sm:text-xl font-medium">School Storage System</h3>
-                <div class="text-muted-foreground">Large Data Center</div>
-              </div>
-              <p class="text-muted-foreground leading-relaxed max-w-lg">Building high performance storage interfaces for schools and teams.</p>
-            </div>
-            <div class="lg:col-span-4 flex flex-wrap gap-2 lg:justify-end mt-2 lg:mt-0">
-              <span class="px-2 py-1 text-xs text-muted-foreground rounded">Intense</span>
-              <span class="px-2 py-1 text-xs text-muted-foreground rounded">Fast</span>
-              <span class="px-2 py-1 text-xs text-muted-foreground rounded">Protected</span>
-            </div>
-          </div>
-
-
-          <div class="group grid lg:grid-cols-12 gap-4 sm:gap-8 py-6 sm:py-8 border-b border-border/50 hover:border-border transition-colors duration-500">
-            <div class="lg:col-span-2">
-              <div class="text-xl sm:text-2xl font-light text-muted-foreground group-hover:text-foreground transition-colors duration-500">2021</div>
-            </div>
-            <div class="lg:col-span-6 space-y-3">
-              <div>
-                <h3 class="text-lg sm:text-xl font-medium">Server Management</h3>
-                <div class="text-muted-foreground">Your Wireless Tech Hub Today!!</div>
-              </div>
-              <p class="text-muted-foreground leading-relaxed max-w-lg">Develop Your platform We run it well</p>
-            </div>
-            <div class="lg:col-span-4 flex flex-wrap gap-2 lg:justify-end mt-2 lg:mt-0">
-              <span class="px-2 py-1 text-xs text-muted-foreground rounded">Skill</span>
-              <span class="px-2 py-1 text-xs text-muted-foreground rounded">DataBase</span>
-              <span class="px-2 py-1 text-xs text-muted-foreground rounded">PHP</span>
-            </div>
-          </div>
-
-          <div class="group grid lg:grid-cols-12 gap-4 sm:gap-8 py-6 sm:py-8 border-b border-border/50 hover:border-border transition-colors duration-500">
-            <div class="lg:col-span-2">
-              <div class="text-xl sm:text-2xl font-light text-muted-foreground group-hover:text-foreground transition-colors duration-500">2019</div>
-            </div>
-            <div class="lg:col-span-6 space-y-3">
-              <div>
-                <h3 class="text-lg sm:text-xl font-medium">Web Designer</h3>
-                <div class="text-muted-foreground">Github</div>
-              </div>
-              <p class="text-muted-foreground leading-relaxed max-w-lg">All Designed Platforms And All Done Via Github's CodeSpaces.</p>
-            </div>
-            <div class="lg:col-span-4 flex flex-wrap gap-2 lg:justify-end mt-2 lg:mt-0">
-              <span class="px-2 py-1 text-xs text-muted-foreground rounded">PHYTHON</span>
-              <span class="px-2 py-1 text-xs text-muted-foreground rounded">Skill</span>
-              <span class="px-2 py-1 text-xs text-muted-foreground rounded">MySQL</span>
-            </div>
-          </div>
-        </div>
+    
+    <section id="work" class="min-h-screen py-20 sm:py-32">
+      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-16 anim-fadeup">
+        <h2 class="text-3xl sm:text-4xl font-light">Selected Work</h2>
+        <div class="section-label">2019 — Present</div>
       </div>
-    </section>
-  <!----Laker Add thoughts next time-->
-    <section id="thoughts" class="min-h-screen py-20 sm:py-32 opacity-0">
-      <div class="space-y-12 sm:space-y-16">
-        <h2 class="text-3xl sm:text-4xl font-light">Recent Thoughts</h2>
 
-        <div class="grid gap-6 sm:gap-8 lg:grid-cols-2">
-          <article class="group p-6 sm:p-8 border border-border rounded-lg hover:border-gray-500 transition-all duration-500 hover:shadow-lg cursor-pointer">
-            <div class="space-y-4">
-              <div class="flex items-center justify-between text-xs text-muted-foreground font-mono">
-                <span>Dec 2024</span>
-                <span>5 min</span>
-              </div>
-              <h3 class="text-lg sm:text-xl font-medium group-hover:text-muted-foreground transition-colors duration-300">The Future of Web Development</h3>
-              <p class="text-muted-foreground leading-relaxed">Exploring how MACMAS and AirSPACE Software are reshaping the way we build the web.</p>
-              <div class="flex items-center gap-2 text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-300">
-                <span>Read more</span>
-                <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </div>
-            </div>
-          </article>
-
-          <article class="group p-6 sm:p-8 border border-border rounded-lg hover:border-gray-500 transition-all duration-500 hover:shadow-lg cursor-pointer">
-            <div class="space-y-4">
-              <div class="flex items-center justify-between text-xs text-muted-foreground font-mono">
-                <span>Nov 2024</span>
-                <span>8 min</span>
-              </div>
-              <h3 class="text-lg sm:text-xl font-medium group-hover:text-muted-foreground transition-colors duration-300">Design Systems at Schools</h3>
-              <p class="text-muted-foreground leading-relaxed">Lessons learned from building and maintaining design systems across multiple products all under MACMAS Academy</p>
-              <div class="flex items-center gap-2 text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-300">
-                <span>Read more</span>
-                <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </div>
-            </div>
-          </article>
-
-          <article class="group p-6 sm:p-8 border border-border rounded-lg hover:border-gray-500 transition-all duration-500 hover:shadow-lg cursor-pointer">
-            <div class="space-y-4">
-              <div class="flex items-center justify-between text-xs text-muted-foreground font-mono">
-                <span>Oct 2024</span>
-                <span>6 min</span>
-              </div>
-              <h3 class="text-lg sm:text-xl font-medium group-hover:text-muted-foreground transition-colors duration-300">Performance-First Development</h3>
-              <p class="text-muted-foreground leading-relaxed">Why performance should be a first-class citizen in your development workflow.</p>
-              <div class="flex items-center gap-2 text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-300">
-                <span>Read more</span>
-                <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </div>
-            </div>
-          </article>
-
-          <article class="group p-6 sm:p-8 border border-border rounded-lg hover:border-gray-500 transition-all duration-500 hover:shadow-lg cursor-pointer">
-            <div class="space-y-4">
-              <div class="flex items-center justify-between text-xs text-muted-foreground font-mono">
-                <span>Sep 2024</span>
-                <span>4 min</span>
-              </div>
-              <h3 class="text-lg sm:text-xl font-medium group-hover:text-muted-foreground transition-colors duration-300">The Art of Code Review</h3>
-              <p class="text-muted-foreground leading-relaxed">I build better software through thoughtful and constructive help through my Fellows & Through Constructive Lines Of Writing.</p>
-              <div class="flex items-center gap-2 text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-300">
-                <span>Read more</span>
-                <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
- 
-    <section id="connect" class="py-20 sm:py-32 opacity-0">
-      <div class="grid lg:grid-cols-2 gap-12 sm:gap-16">
-        <div class="space-y-6 sm:space-y-8">
-          <h2 class="text-3xl sm:text-4xl font-light">Let's Connect</h2>
-
-          <div class="space-y-6">
-            <p class="text-lg sm:text-xl text-muted-foreground leading-relaxed">
-              Always interested in new opportunities, collaborations, and conversations about technology, design and improve systems like MACMAS, MACMAS Academy and AirSPACE.
-            </p>
-
-            <div class="space-y-4">
-              <a href="mailto:test@example.com" class="group flex items-center gap-3 text-foreground hover:text-muted-foreground transition-colors duration-300">
-                <span class="text-base sm:text-lg">lakerleslie3@gmail.com</span>
-                <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="space-y-6 sm:space-y-8">
-          <div class="text-sm text-muted-foreground font-mono">ELSEWHERE</div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <a href="#" class="group p-4 border border-border rounded-lg hover:border-gray-500 transition-all duration-300 hover:shadow-sm">
-              <div class="space-y-2">
-                <div class="text-foreground group-hover:text-muted-foreground transition-colors duration-300">GitHub</div>
-                <div class="text-sm text-muted-foreground">@LexMACMAS</div>
-              </div>
-            </a>
-
-            <a href="#" class="group p-4 border border-border rounded-lg hover:border-gray-500 transition-all duration-300 hover:shadow-sm">
-              <div class="space-y-2">
-                <div class="text-foreground group-hover:text-muted-foreground transition-colors duration-300">Phone</div>
-                <div class="text-sm text-muted-foreground">+256-77-537-7603</div>
-              </div>
-            </a>
-
-            <a href="#" class="group p-4 border border-border rounded-lg hover:border-gray-500 transition-all duration-300 hover:shadow-sm">
-              <div class="space-y-2">
-                <div class="text-foreground group-hover:text-muted-foreground transition-colors duration-300">Twitter / X</div>
-                <div class="text-sm text-muted-foreground">@lakerleslie3</div>
-              </div>
-            </a>
-
-            <a href="#" class="group p-4 border border-border rounded-lg hover:border-gray-500 transition-all duration-300 hover:shadow-sm">
-              <div class="space-y-2">
-                <div class="text-foreground group-hover:text-muted-foreground transition-colors duration-300">LinkedIn</div>
-                <div class="text-sm text-muted-foreground">Laker Leslie Jordan</div>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-    <footer class="py-12 sm:py-16 border-t border-border">
-      <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 sm:gap-8">
+      
+      <div class="work-row anim-fadeup delay-100">
+        <div class="text-xl font-light text-muted-foreground pt-1">2023</div>
         <div class="space-y-2">
-          <div class="text-sm text-muted-foreground">© 2026 AirSPACEx . All rights reserved.</div>
-          <div class="text-xs text-muted-foreground">AirSPACEx</div>
+          <h3 class="text-lg font-medium">Server-Side Storage</h3>
+          <div class="text-sm text-muted-foreground">AirSPACEx</div>
+          <p class="text-muted-foreground text-sm leading-relaxed max-w-md">
+            Leading infrastructure for developer tools and AI-powered platforms.
+          </p>
+          <div class="flex flex-wrap gap-2 mt-2">
+            <span class="tag">Secure</span>
+            <span class="tag">Fast</span>
+            <span class="tag">Reliable</span>
+          </div>
+        </div>
+      </div>
+
+     
+      <div class="work-row anim-fadeup delay-200">
+        <div class="text-xl font-light text-muted-foreground pt-1">2022</div>
+        <div class="space-y-2">
+          <h3 class="text-lg font-medium">School Storage System</h3>
+          <div class="text-sm text-muted-foreground">Large Data Center</div>
+          <p class="text-muted-foreground text-sm leading-relaxed max-w-md">
+            High-performance storage interfaces built for schools and collaborative teams.
+          </p>
+          <div class="flex flex-wrap gap-2 mt-2">
+            <span class="tag">High-intensity</span>
+            <span class="tag">Fast</span>
+            <span class="tag">Protected</span>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="work-row anim-fadeup delay-300">
+        <div class="text-xl font-light text-muted-foreground pt-1">2021</div>
+        <div class="space-y-2">
+          <h3 class="text-lg font-medium">Server Management</h3>
+          <div class="text-sm text-muted-foreground">Your Wireless Tech Hub</div>
+          <p class="text-muted-foreground text-sm leading-relaxed max-w-md">
+            Build your platform — we run it reliably, securely, and at scale.
+          </p>
+          <div class="flex flex-wrap gap-2 mt-2">
+            <span class="tag">Database</span>
+            <span class="tag">PHP</span>
+            <span class="tag">Skill</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 4 -->
+      <div class="work-row anim-fadeup delay-400">
+        <div class="text-xl font-light text-muted-foreground pt-1">2019</div>
+        <div class="space-y-2">
+          <h3 class="text-lg font-medium">Web Designer</h3>
+          <div class="text-sm text-muted-foreground">GitHub</div>
+          <p class="text-muted-foreground text-sm leading-relaxed max-w-md">
+            Designed and deployed platforms entirely via GitHub Codespaces.
+          </p>
+          <div class="flex flex-wrap gap-2 mt-2">
+            <span class="tag">Python</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">Design</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+    <section id="thoughts" class="min-h-screen py-20 sm:py-32">
+      <div class="mb-16 anim-fadeup">
+        <div class="section-label mb-3">Writing</div>
+        <h2 class="text-3xl sm:text-4xl font-light">Recent Thoughts</h2>
+      </div>
+
+      <div class="grid gap-6 sm:gap-8 lg:grid-cols-2">
+        <article class="thought-card anim-scalein delay-100">
+          <div class="flex items-center justify-between text-xs text-muted-foreground mb-4" style="font-family:monospace;">
+            <span>Dec 2024</span><span>5 min read</span>
+          </div>
+          <h3 class="text-lg font-medium mb-3 leading-snug">The Future of Web Development</h3>
+          <p class="text-sm text-muted-foreground leading-relaxed mb-5">
+            How MACMAS and AirSPACE Software are reshaping the way we build the web.
+          </p>
+          <div class="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors group">
+            <span>Read more</span>
+            <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </div>
+        </article>
+
+        <article class="thought-card anim-scalein delay-200">
+          <div class="flex items-center justify-between text-xs text-muted-foreground mb-4" style="font-family:monospace;">
+            <span>Nov 2024</span><span>8 min read</span>
+          </div>
+          <h3 class="text-lg font-medium mb-3 leading-snug">Design Systems at Schools</h3>
+          <p class="text-sm text-muted-foreground leading-relaxed mb-5">
+            Lessons from building and maintaining design systems across MACMAS Academy.
+          </p>
+          <div class="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors group">
+            <span>Read more</span>
+            <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </div>
+        </article>
+
+        <article class="thought-card anim-scalein delay-300">
+          <div class="flex items-center justify-between text-xs text-muted-foreground mb-4" style="font-family:monospace;">
+            <span>Oct 2024</span><span>6 min read</span>
+          </div>
+          <h3 class="text-lg font-medium mb-3 leading-snug">Performance-First Development</h3>
+          <p class="text-sm text-muted-foreground leading-relaxed mb-5">
+            Why performance deserves to be a first-class citizen in every development workflow.
+          </p>
+          <div class="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors group">
+            <span>Read more</span>
+            <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </div>
+        </article>
+
+        <article class="thought-card anim-scalein delay-400">
+          <div class="flex items-center justify-between text-xs text-muted-foreground mb-4" style="font-family:monospace;">
+            <span>Sep 2024</span><span>4 min read</span>
+          </div>
+          <h3 class="text-lg font-medium mb-3 leading-snug">The Art of Code Review</h3>
+          <p class="text-sm text-muted-foreground leading-relaxed mb-5">
+            Building better software through thoughtful collaboration and constructive critique.
+          </p>
+          <div class="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors group">
+            <span>Read more</span>
+            <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    
+    <section id="connect" class="py-20 sm:py-32">
+      <div class="grid lg:grid-cols-2 gap-12 sm:gap-16">
+        <div class="space-y-6 anim-fadeleft">
+          <div class="section-label">Get in touch</div>
+          <h2 class="text-3xl sm:text-4xl font-light">Let's Connect</h2>
+          <p class="text-lg text-muted-foreground leading-relaxed">
+            Always open to new opportunities, collaborations, and conversations about
+            technology, design, and improving systems like MACMAS, MACMAS Academy and AirSPACE.
+          </p>
+          <a href="mailto:lakerleslie3@gmail.com" class="contact-link mt-4">
+            <span>lakerleslie3@gmail.com</span>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </a>
         </div>
 
-        <div class="flex items-center gap-4">
-          <button onclick="toggleTheme()" class="group p-3 rounded-lg border border-border hover:border-gray-500 transition-all duration-300" aria-label="Toggle theme">
-            <svg id="sun-icon" class="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors duration-300 hidden" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd" />
-            </svg>
-            <svg id="moon-icon" class="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors duration-300" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
-            </svg>
-          </button>
+        <div class="space-y-6 anim-faderight delay-200">
+          <div class="section-label">Elsewhere</div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <a href="#" class="social-card">
+              <div class="font-medium mb-1">GitHub</div>
+              <div class="text-sm text-muted-foreground">@LexMACMAS</div>
+            </a>
+            <a href="tel:+256775377603" class="social-card">
+              <div class="font-medium mb-1">Phone</div>
+              <div class="text-sm text-muted-foreground">+256 775 377 603</div>
+            </a>
+            <a href="#" class="social-card">
+              <div class="font-medium mb-1">Twitter / X</div>
+              <div class="text-sm text-muted-foreground">@lakerleslie3</div>
+            </a>
+            <a href="#" class="social-card">
+              <div class="font-medium mb-1">LinkedIn</div>
+              <div class="text-sm text-muted-foreground">Laker Leslie Jordan</div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
 
-          <button class="group p-3 rounded-lg border border-border hover:border-gray-500 transition-all duration-300">
-            <svg class="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+   
+    <footer class="py-12 sm:py-16 border-t border-border">
+      <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+        <div class="space-y-1">
+          <div class="text-sm text-muted-foreground">© 2025 Laker Leslie Jordan. All rights reserved.</div>
+          <div class="text-xs text-muted-foreground">Built by Laker Leslie Jordan · ZEROGRAVITY</div>
+        </div>
+        <div class="flex items-center gap-3">
+          <button onclick="toggleTheme()" class="theme-btn" aria-label="Toggle theme">
+            <svg id="sun-icon" class="w-4 h-4 hidden" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/>
+            </svg>
+            <svg id="moon-icon" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
             </svg>
           </button>
         </div>
       </div>
     </footer>
+
   </main>
 
-  <div class="fixed bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none"></div>
+  
+  <div class="bottom-fade"></div>
 
   <script>
-    function toggleTheme() {
-      const html = document.documentElement;
-      const isDark = html.classList.contains('dark');
-      html.classList.toggle('dark');
-      
-      const sunIcon = document.getElementById('sun-icon');
-      const moonIcon = document.getElementById('moon-icon');
-      
-      if (isDark) {
-        sunIcon.classList.remove('hidden');
-        moonIcon.classList.add('hidden');
-      } else {
-        sunIcon.classList.add('hidden');
-        moonIcon.classList.remove('hidden');
-      }
+   
+    const starsEl = document.getElementById('stars');
+    for (let i = 0; i < 140; i++) {
+      const s = document.createElement('div');
+      s.className = 'star';
+      const size = Math.random() < 0.75 ? 1 : 2;
+      s.style.cssText = `
+        left:${Math.random()*100}%;
+        top:${Math.random()*100}%;
+        width:${size}px; height:${size}px;
+        --d:${2.5 + Math.random()*4}s;
+        --delay:${-(Math.random()*6)}s;
+      `;
+      starsEl.appendChild(s);
     }
 
+    
+    const sections = document.querySelectorAll('header, section');
+    const navDots  = document.querySelectorAll('.nav-dot');
+    const sectionIds = ['intro', 'work', 'thoughts', 'connect'];
 
+    function setActiveNav(id) {
+      navDots.forEach((dot, i) => {
+        dot.classList.toggle('active', sectionIds[i] === id);
+      });
+    }
+
+    
+    setActiveNav('intro');
+    navDots[0].classList.add('active');
+
+    
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+       
+          entry.target.querySelectorAll('[class*="anim-"]').forEach(el => {
+            el.classList.add('visible');
+          });
+        
+          if (sectionIds.includes(entry.target.id)) {
+            setActiveNav(entry.target.id);
+          }
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -10% 0px' });
+
+    sections.forEach(s => revealObserver.observe(s));
+
+    setTimeout(() => {
+      document.querySelector('#intro').querySelectorAll('[class*="anim-"]').forEach(el => {
+        el.classList.add('visible');
+      });
+    }, 100);
+
+  
     function scrollToSection(id) {
       document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
     }
-    const sections = document.querySelectorAll('header, section');
-    const navDots = document.querySelectorAll('.nav-dot');
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate-fade-in-up');
-
-          const sectionId = entry.target.id;
-          navDots.forEach((dot, index) => {
-            const sections = ['intro', 'work', 'thoughts', 'connect'];
-            if (sections[index] === sectionId) {
-              dot.classList.add('active');
-            } else {
-              dot.classList.remove('active');
-            }
-          });
-        }
-      });
-    }, { threshold: 0.3, rootMargin: '0px 0px -20% 0px' });
-
-    sections.forEach(section => observer.observe(section));
-    navDots[0].classList.add('active');
+    function toggleTheme() {
+      const html   = document.documentElement;
+      const isDark = html.classList.contains('dark');
+      html.classList.toggle('dark');
+      document.getElementById('sun-icon').classList.toggle('hidden', isDark);
+      document.getElementById('moon-icon').classList.toggle('hidden', !isDark);
+      
+      document.querySelector('.bottom-fade').style.background =
+        isDark
+          ? 'linear-gradient(to top, #fff, transparent)'
+          : 'linear-gradient(to top, oklch(0.145 0 0), transparent)';
+    }
   </script>
 </body>
 </html>
-<!------N@alya-44-Exce!!ence2025-->
