@@ -546,18 +546,7 @@
     }
 
   
-    function toggleTheme() {
-      const html   = document.documentElement;
-      const isDark = html.classList.contains('dark');
-      html.classList.toggle('dark');
-      document.getElementById('sun-icon').classList.toggle('hidden', isDark);
-      document.getElementById('moon-icon').classList.toggle('hidden', !isDark);
-      
-      document.querySelector('.bottom-fade').style.background =
-        isDark
-          ? 'linear-gradient(to top, #fff, transparent)'
-          : 'linear-gradient(to top, oklch(0.145 0 0), transparent)';
-    }
+
 
     // Reveal animations on scroll
     const sections = document.querySelectorAll('header, section');
