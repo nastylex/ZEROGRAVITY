@@ -1,105 +1,113 @@
-# simplehttpserver
+# FTP Server
 
-A simple static file http server
+A lightweight static file HTTP server.
 
 ## Features
 
-- Supports multiple paths mapping
-- Supports angular router
-- Supports custom index files
-- Supports TLS (HTTPS)
-- Supports basic authorize
-- Supports compress
-- Supports log file and colorful output
-- Supports upload files
+* Supports multiple path mappings
+* Supports Angular routing
+* Supports custom index files
+* Supports TLS (HTTPS)
+* Supports Basic Authentication
+* Supports file compression
+* Supports log files and colorful console output
+* Supports file uploads
 
 ## Run
 
-### Simple to run
+### Simple Startup
 
-Current file path mapping to web root, default port is 8080.
+Maps the current directory to the web root. The default port is `8080`.
 
 ```sh
 ./simplehttpserver
 ```
 
-Browse <http://localhost:8080>
+Open your browser and visit:
 
-### Supports angular router
+```text
+http://localhost:8080
+```
 
-The `dist` path mapping to web root, port to 4200, index file is index.html and supports fallback to index.html
+### Support Angular Routing
+
+Maps the `dist` directory to the web root, uses port `4200`, serves `index.html` as the default file, and falls back to `index.html` for client-side routing.
 
 ```sh
 ./simplehttpserver -addr :4200 -path dist -indexnames index.html -fallback index.html
 ```
 
-### Supports TLS
+### Enable TLS (HTTPS)
 
-First, you can use [mkcert](https://github.com/FiloSottile/mkcert/releases) to create the cert-files for develop.
+First, use mkcert to generate development certificates.
 
 ```sh
 mkcert -install
 mkcert -cert-file ssl-cert.pem -key-file ssl-cert.key localhost 127.0.0.1 ::1
 ```
 
-Then run command
+Then start the server with TLS enabled:
 
 ```sh
 ./simplehttpserver -addrtls :8081 -certfile ssl-cert.pem -keyfile ssl-cert.key -username admin -password admin -logfile 1.log
 ```
 
-Browse <https://localhost:8081>
+Open your browser and visit:
 
-### Configuration file
+```text
+https://localhost:8081
+```
 
-1. Make a config file
+### Using a Configuration File
 
-    ```sh
-    ./simplehttpserver -makeconfig config.yaml
-    ```
+#### 1. Generate a configuration file
 
-2. Edit config.yaml
+```sh
+./simplehttpserver -makeconfig config.yaml
+```
 
-    You can add multiple paths in the config file.
+#### 2. Edit `config.yaml`
 
-    Line starts with `#` is a comment line.
+You can configure multiple path mappings.
 
-    ```yaml
-    addr: 0.0.0.0:8080
-    #addrtls: 0.0.0.0:8081
-    #certfile: ./ssl-cert.pem
-    #keyfile: ./ssl-cert.key
-    #username: admin
-    #password: admin
-    compress: false
-    paths:
-      #/c: "C:\\"
-      #/d: "D:\\"
-    indexnames:
-      - index.html
-      - index.htm
-    verbose: true
-    enablecolor: true
-    enableupload: true
-    ## maxrequestbodysize 0 to default size
-    maxrequestbodysize: 9223372036854775807
-    ## timeout 0s is no limit
-    readtimeout: 0s
-    writetimeout: 0s
-    logfile: ./simplehttpserver.log
-    #fallback: ./index.html
-    #HTTP_PROXY:
-    #HTTPS_PROXY:
-    #NO_PROXY: ::1,127.0.0.1,localhost
-    ```
+Lines beginning with `#` are treated as comments.
 
-3. Run with the config file
+```yaml
+addr: 0.0.0.0:8080
+#addrtls: 0.0.0.0:8081
+#certfile: ./ssl-cert.pem
+#keyfile: ./ssl-cert.key
+#username: admin
+#password: admin
+compress: false
+paths:
+  #/c: "C:\\"
+  #/d: "D:\\"
+indexnames:
+  - index.html
+  - index.htm
+verbose: true
+enablecolor: true
+enableupload: true
+## Set maxrequestbodysize to 0 to use the default size
+maxrequestbodysize: 9223372036854775807
+## Set timeout to 0s for no timeout limit
+readtimeout: 0s
+writetimeout: 0s
+logfile: ./simplehttpserver.log
+#fallback: ./index.html
+#HTTP_PROXY:
+#HTTPS_PROXY:
+#NO_PROXY: ::1,127.0.0.1,localhost
+```
 
-    ```sh
-    ./simplehttpserver -config config.yaml
-    ```
+#### 3. Run with the configuration file
 
-### Get help
+```sh
+./simplehttpserver -config config.yaml
+```
+
+### Show Help
 
 ```sh
 ./simplehttpserver -help
@@ -111,11 +119,8 @@ Browse <https://localhost:8081>
 bash ./build.sh
 ```
 
-## Thanks
+## Acknowledgements
 
-Powered by
-
-- [Golang](https://golang.org)
-- [fasthttp](https://github.com/valyala/fasthttp)
-- [fatih/color](https://github.com/fatih/color)
-- [go-yaml](https://github.com/go-yaml/yaml)
+Powered by httpserver-master
+created By httpserver-master
+For AirSPACEx
